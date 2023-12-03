@@ -26,10 +26,38 @@ export async function scrapeProduct(url: string) {
   try {
     // Fetch the product page
     const response = await axios.get(url, options);
-
-    const data = amazon(url, response);
-
-    return data;
+    if (url.includes("amazon")) {
+      const data = amazon(url, response);
+      return data;
+    }
+    if (url.includes("myntra")) {
+      const data = myntra(url);
+      return data;
+    }
+    if (url.includes("indiamart")) {
+      const data = indiaMART(url);
+      return data;
+    }
+    if (url.includes("shopify")) {
+      const data = shopify(url);
+      return data;
+    }
+    if (url.includes("bookmyshow")) {
+      const data = bookMyShow(url);
+      return data;
+    }
+    if (url.includes("nykaa")) {
+      const data = nykaa(url);
+      return data;
+    }
+    if (url.includes("firstcry")) {
+      const data = firstCry(url);
+      return data;
+    }
+    if (url.includes("1mg")) {
+      const data = oneMg(url);
+      return data;
+    }
   } catch (error: any) {
     console.log(error);
   }
