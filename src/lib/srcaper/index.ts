@@ -137,3 +137,49 @@ const flipkart = async (url: string) => {
     console.error(error);
   }
 };
+
+const myntra = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $(".pdp-title").text().trim();
+    const currentPrice = $(".pdp-price").text().trim();
+    const originalPrice = $(".pdp-mrp").text().trim();
+    const discountRate = $(".pdp-discount").text().trim();
+    const category = $(".breadcrumbs-container a").last().text().trim();
+    const reviewsCount = $(".rating-count").text().trim();
+    const stars = $(".rating-value").text().trim();
+    const isOutOfStock = $(".size-buttons-unified-size").length === 0;
+    const description = $(".pdp-product-description").text().trim();
+    const imageUrls: string[] = [];
+    $(".image-grid-image").each((i, elem) => {
+      imageUrls.push(
+        $(elem)?.attr("style")?.match(`/url\("(.*)"\)/`)?.[0] ?? ""
+      );
+    });
+
+    const data = {
+      url,
+      currency: "₹",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate: Number(discountRate.replace(/[^0-9.-]+/g, "")),
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars.replace(/[^0-9.-]+/g, "")),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
