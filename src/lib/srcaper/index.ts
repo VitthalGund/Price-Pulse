@@ -183,3 +183,334 @@ const myntra = async (url: string) => {
     console.error(error);
   }
 };
+const shopify = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $(".product-single__title").text().trim();
+    const currentPrice = $(".product__price").text().trim();
+    const originalPrice = $(".product__price--compare-at").text().trim();
+    const discountRate = $(".product__price--compare-at").text()
+      ? Math.round(
+          (1 -
+            Number(currentPrice.replace(/[^0-9.-]+/g, "")) /
+              Number(originalPrice.replace(/[^0-9.-]+/g, ""))) *
+            100
+        )
+      : 0;
+    const category = $(".breadcrumb-item a").last().text().trim();
+    const reviewsCount = $(".spr-badge-caption").text().trim();
+    const stars = $(".spr-badge").attr("data-rating");
+    const isOutOfStock =
+      $(".product-form__item--submit .btn").text().trim() === "Sold Out";
+    const description = $(".rte").text().trim();
+    const imageUrls: any[] = [];
+    $(".product-single__photo").each((i, elem) => {
+      imageUrls.push($(elem).attr("src"));
+    });
+
+    const data = {
+      url,
+      currency: "$",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate,
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const ebay = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $("#itemTitle")
+      .text()
+      .replace(/Details about  /i, "")
+      .trim();
+    const currentPrice = $("#prcIsum").attr("content");
+    const originalPrice = $(".vi-originalPrice").text().trim();
+    const discountRate = $(".vi-originalPrice").text()
+      ? Math.round(
+          (1 -
+            Number(currentPrice) /
+              Number(originalPrice.replace(/[^0-9.-]+/g, ""))) *
+            100
+        )
+      : 0;
+    const category = $(".bc-w a").last().text().trim();
+    const reviewsCount = $("#vi-bybox-stars-on .vi-VR-rvRtgPct").text().trim();
+    const stars = $("#vi-bybox-stars-on .vi-VR-rvRtgPct").text().trim();
+    const isOutOfStock = $("#qtySubTxt").text().trim() === "Out of stock";
+    const description = $("#vi-desc-maincntr .sec").text().trim();
+    const imageUrls: any[] = [];
+    $("#vi_main_img_fs ul li img").each((i, elem) => {
+      imageUrls.push($(elem).attr("src"));
+    });
+
+    const data = {
+      url,
+      currency: "$",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate,
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars.replace(/[^0-9.-]+/g, "")),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const indiaMART = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $(".pNAk .lcname").text().trim();
+    const currentPrice = $(".prcDsp").text().trim();
+    const originalPrice = $(".prcDsp").text().trim(); // IndiaMART does not display original price if discounted
+    const discountRate = 0; // IndiaMART does not display discount rate
+    const category = $(".br.breadcrumbs a").last().text().trim();
+    const reviewsCount = $(".veR > span").text().trim();
+    const stars = $(".veR > span").text().trim();
+    const isOutOfStock =
+      $(".r.c3").text().trim() === "This product is out of stock!";
+    const description = $(".desc.itmC").text().trim();
+    const imageUrls: any[] = [];
+    $(".imgC img").each((i, elem) => {
+      imageUrls.push($(elem).attr("src"));
+    });
+
+    const data = {
+      url,
+      currency: "₹",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate,
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars.replace(/[^0-9.-]+/g, "")),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const bookMyShow = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $(".__name").text().trim();
+    const currentPrice = $(".__price").text().trim();
+    const originalPrice = $(".__price").text().trim(); // Book My Show does not display original price if discounted
+    const discountRate = 0; // Book My Show does not display discount rate
+    const category = $(".__dimension").text().trim();
+    const reviewsCount = $(".__votes").text().trim();
+    const stars = $(".__percentage").text().trim();
+    const isOutOfStock = $(".__book-button").text().trim() === "SOLD OUT";
+    const description = $(".__synopsis").text().trim();
+    const imageUrls: any[] = [];
+    $(".__poster img").each((i, elem) => {
+      imageUrls.push($(elem).attr("data-src"));
+    });
+
+    const data = {
+      url,
+      currency: "₹",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate,
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars.replace(/[^0-9.-]+/g, "")),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const nykaa = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $(".product-title").text().trim();
+    const currentPrice = $(".post-card__content-price-offer").text().trim();
+    const originalPrice = $(".post-card__content-price").text().trim();
+    const discountRate = $(".post-card__content-price-discount").text().trim();
+    const category = $(".breadcrumb-item a").last().text().trim();
+    const reviewsCount = $(".ratings__count").text().trim();
+    const stars = $(".ratings").attr("data-avg-rating");
+    const isOutOfStock =
+      $(".add-to-bag-button ").text().trim() === "Out of Stock";
+    const description = $("#product-des").text().trim();
+    const imageUrls: any[] = [];
+    $(".swiper-slide img").each((i, elem) => {
+      imageUrls.push($(elem).attr("src"));
+    });
+
+    const data = {
+      url,
+      currency: "₹",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate: Number(discountRate.replace(/[^0-9.-]+/g, "")),
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const firstCry = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $(".pdp_title").text().trim();
+    const currentPrice = $(".pdpprice").text().trim();
+    const originalPrice = $(".mrp").text().trim();
+    const discountRate = $(".off").text().trim();
+    const category = $(".breadcrumb li").last().text().trim();
+    const reviewsCount = $(".ratings .rating").text().trim();
+    const stars = $(".ratings .rating").text().trim();
+    const isOutOfStock = $(".pdp_soldout").length > 0;
+    const description = $("#productDetailTab").text().trim();
+    const imageUrls: any[] = [];
+    $(".swiper-slide img").each((i, elem) => {
+      imageUrls.push($(elem).attr("src"));
+    });
+
+    const data = {
+      url,
+      currency: "₹",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate: Number(discountRate.replace(/[^0-9.-]+/g, "")),
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars.replace(/[^0-9.-]+/g, "")),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const oneMg = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+
+    const title = $(".DrugHeader__title___Ybe4H").text().trim();
+    const currentPrice = $(".DrugPriceBox__price___dj2lv").text().trim();
+    const originalPrice = $(".DrugPriceBox__mrp___2nE8l").text().trim();
+    const discountRate = $(".DrugPriceBox__discount___3k5Lw").text().trim();
+    const category = $(".BreadCrumbs__breadcrumb___2OHWq a")
+      .last()
+      .text()
+      .trim();
+    const reviewsCount = $(".RatingsBox__reviews___1xR1n").text().trim();
+    const stars = $(".RatingsBox__ratings___1WZ7W").text().trim();
+    const isOutOfStock =
+      $(".style__horizontal-box___1df3Z").text().trim() === "Out of Stock";
+    const description = $(".DrugOverview__content___22ZBX").text().trim();
+    const imageUrls: any[] = [];
+    $(".Carousel__image___1Nq6h").each((i, elem) => {
+      imageUrls.push($(elem).attr("src"));
+    });
+
+    const data = {
+      url,
+      currency: "₹",
+      image: imageUrls[0],
+      title,
+      currentPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      originalPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      priceHistory: [],
+      discountRate: Number(discountRate.replace(/[^0-9.-]+/g, "")),
+      category,
+      reviewsCount: Number(reviewsCount.replace(/[^0-9.-]+/g, "")),
+      stars: Number(stars.replace(/[^0-9.-]+/g, "")),
+      isOutOfStock,
+      description,
+      lowestPrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+      highestPrice: Number(originalPrice.replace(/[^0-9.-]+/g, "")),
+      averagePrice: Number(currentPrice.replace(/[^0-9.-]+/g, "")),
+    };
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
