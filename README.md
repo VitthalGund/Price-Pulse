@@ -34,3 +34,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# Price-Pulse
+
+PricePulse is a one-stop solution for tracking the live prices of your favorite products across multiple e-commerce platforms. Whether you’re looking for the best deals or waiting for the perfect time to buy, PricePulse keeps you updated in real-time.
