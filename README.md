@@ -1,8 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PricePulse: Your Pulse on Live Market Prices
 
-## Getting Started
+## Table of Contents
 
-First, run the development server:
+- [Description](#description)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Motivation
+
+In the fast-paced world of online shopping, prices fluctuate frequently. Our motivation is to empower consumers with real-time price information, enabling them to make informed purchasing decisions and get the best value for their money.
+
+## Mission
+
+Our mission is to revolutionize the way people shop online. By providing live price tracking across multiple platforms, we aim to create a transparent and competitive e-commerce environment that benefits both consumers and retailers.
+
+## Description
+
+Welcome to PricePulse, a real-time price tracking application designed to keep you updated with the latest prices of your favorite products across multiple e-commerce platforms. With PricePulse, you can stay ahead of the market, ensuring you never miss out on a good deal. Our application provides you with the current, lowest, highest, and average prices of products, helping you make informed purchasing decisions.
+
+## Features
+
+- **Live Price Tracking**: PricePulse offers live price tracking across multiple platforms including Amazon, Flipkart, Myntra, Shopify, eBay, IndiaMART, Book My Show, Nykaa, First Cry, and 1mg. Our application fetches the latest prices in real-time, ensuring you have the most up-to-date information at your fingertips.
+- **Comprehensive Price Details**: With PricePulse, you get more than just the current price. Our application tracks the lowest, highest, and average prices of products, giving you a comprehensive overview of the product's price history.
+- **Real-Time Alerts**: Never miss out on a price drop again. PricePulse sends you real-time alerts whenever the price of a tracked product drops.
+- **User-Friendly Interface**: PricePulse features a user-friendly interface that makes navigation a breeze. Tracking prices has never been easier.
+
+## Installation
+
+This project is built using Next.js. To set up the project locally, follow these steps:
+
+1. **Clone the repository**: Use the following command to clone the repository to your local machine.
+
+```bash
+git clone https://github.com/username/PricePulse.git
+```
+
+2. **Navigate to the project directory**: Change to the project directory with the following command.
+
+```bash
+cd PricePulse
+```
+
+3. **Install the dependencies**: Install all the necessary dependencies using the following command.
+
+```bash
+npm install
+# or
+yarn
+```
+
+4. **Run the application**: Start the application using the following command.
 
 ```bash
 npm run dev
@@ -14,27 +64,18 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application will start running at `http://localhost:3000`.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To use PricePulse, simply enter the URL of the product you want to track. PricePulse will provide you with real-time price updates and historical price data, helping you decide the best time to make a purchase.
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+We welcome contributions from the community. If you'd like to contribute, please fork the repository and make changes as you'd like. Pull requests are warmly welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-# Price-Pulse
-
-PricePulse is a one-stop solution for tracking the live prices of your favorite products across multiple e-commerce platforms. Whether you’re looking for the best deals or waiting for the perfect time to buy, PricePulse keeps you updated in real-time.
+This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
+```
