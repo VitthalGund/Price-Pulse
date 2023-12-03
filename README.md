@@ -64,9 +64,20 @@ pnpm dev
 bun dev
 ```
 
+The application will start running at `http://localhost:3000`.
+
+## Setup environoment variables
+
+```
+MONGODB_URI= # connection string of mongodb
+Email= # your email from which email is going to send (@outlook)
+EMAIL_PASSWORD= # your email's password from which email is going to send (@outlook)
+BRIGHT_DATA_USERNAME=
+BRIGHT_DATA_PASSWORD=
 ```
 
-The application will start running at `http://localhost:3000`.
+to get `BRIGHT_DATA_USERNAME` and `BRIGHT_DATA_PASSWORD` register/login here: https://brightdata.com/ (not affiliate link)
+
 ## Usage
 
 To use PricePulse, simply enter the URL of the product you want to track. PricePulse will provide you with real-time price updates and historical price data, helping you decide the best time to make a purchase.
@@ -78,4 +89,7 @@ We welcome contributions from the community. If you'd like to contribute, please
 ## License
 
 This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
+
+```
+
 ```
