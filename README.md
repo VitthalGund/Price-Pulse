@@ -35,7 +35,7 @@ This project is built using Next.js. To set up the project locally, follow these
 1. **Clone the repository**: Use the following command to clone the repository to your local machine.
 
 ```bash
-git clone https://github.com/username/PricePulse.git
+git clone https://github.com/VitthalGund/Price-Pulse.git
 ```
 
 2. **Navigate to the project directory**: Change to the project directory with the following command.
@@ -89,7 +89,5 @@ We welcome contributions from the community. If you'd like to contribute, please
 ## License
 
 This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
+![image](https://github.com/VitthalGund/Price-Pulse/assets/97181033/7266085e-d993-4873-b933-3190e8df6344)
 
-```
-
-```
