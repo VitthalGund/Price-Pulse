@@ -89,5 +89,4 @@ We welcome contributions from the community. If you'd like to contribute, please
 ## License
 
 This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
-![image](https://github.com/VitthalGund/Price-Pulse/assets/97181033/7266085e-d993-4873-b933-3190e8df6344)
 
